@@ -24,13 +24,28 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(console.warn) // some code to run if an error occurs
 
-        const randomUserUrl = "https://randomuser.me/api?results=100"
+    document.querySelector("#randomUserForm").addEventListener("submit", function(e) {
+        // tell the form not to refresh the page when the submit button is clicked
+        e.preventDefault()
+        // fetch the data from the api
+        const numberOfUsers = document.querySelector("#numberInput").value
+        const randomUserUrl = "https://randomuser.me/api?results=" + numberOfUsers
         // https://www.google.com/search?q=mango
         fetch(randomUserUrl)
             .then(rawResponse => rawResponse.json()) // convert to json with an 'implicit return' arrow function
             .then(jsonData => {
-                console.log(jsonData.results)
+                console.log(jsonData.results[0].name)
+                const ul = document.querySelector("#randomUserList")
+                jsonData.results.forEach(result => {
+                    // 1. create the new li elements
+                    const li = document.createElement("li")
+                    // 2. change their properties
+                    li.innerText = `${result.name.title} ${result.name.first} ${result.name.last}`
+                    // 3. append them to the DOM
+                    ul.append(li)
+                })
             })
             .catch(console.warn)
+    })
 
 })
