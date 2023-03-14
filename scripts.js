@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(console.warn) // some code to run if an error occurs
 
-        const randomUserUrl = "https://randomuser.me/api"
+        const randomUserUrl = "https://randomuser.me/api?results=100"
+        // https://www.google.com/search?q=mango
         fetch(randomUserUrl)
             .then(rawResponse => rawResponse.json()) // convert to json with an 'implicit return' arrow function
             .then(jsonData => {
