@@ -36,6 +36,11 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(jsonData => {
                 console.log(jsonData.results[0].name)
                 const ul = document.querySelector("#randomUserList")
+                // clear out the unordered list before we populate it with new data
+                console.dir(ul)
+                while(ul.firstChild) {
+                    ul.removeChild(ul.firstChild)
+                }
                 jsonData.results.forEach(result => {
                     // 1. create the new li elements
                     const li = document.createElement("li")
